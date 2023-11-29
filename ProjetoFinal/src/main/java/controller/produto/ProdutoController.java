@@ -55,8 +55,6 @@ public class ProdutoController implements Controller<Produto> {
 				categoria.setDescricao(resultSet.getString("descricao"));
 				produto.setCategoria(categoria);
 
-				UnidadeMedida unidadeMedida = new UnidadeMedida();
-
 				produtos.add(produto);
 			}
 			return produtos;
@@ -68,15 +66,19 @@ public class ProdutoController implements Controller<Produto> {
 	@Override
 	public Produto exibir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM produto WHERE ID = ?");
-				ResultSet resultSet = preparedStatement.executeQuery()) {
-			Produto produto = new Produto();
-			if (resultSet.next()) {
-				produto.setId(resultSet.getLong("ID"));
-				produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
-				produto.setDescricao(resultSet.getString("DESCRICAO"));
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM produto WHERE ID = ?")) {
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			{
+				Produto produto = new Produto();
+				if (resultSet.next()) {
+					produto.setId(resultSet.getLong("ID"));
+					produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
+					produto.setDescricao(resultSet.getString("DESCRICAO"));
+				}
+				return produto;
 			}
-			return produto;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir produto", e);
 		}
@@ -84,6 +86,14 @@ public class ProdutoController implements Controller<Produto> {
 
 	@Override
 	public void excluir(Long id) {
+		try(
+				Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")){
+					preparedStatement.setLong(1, id);
 
+				}catch(SQLException e) {
+					throw new RuntimeException("Erro ao excluir o produto",e);
+				}
+				
 	}
 }
