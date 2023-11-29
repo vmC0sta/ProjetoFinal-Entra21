@@ -15,12 +15,12 @@ import java.util.Map;
 import Util.DBConnection;
 
 public class UnidadeMedidaController implements Controller<UnidadeMedida> {
-	
-    private DBConnection dbConnection;
+
+	private DBConnection dbConnection;
 
 	public UnidadeMedidaController(DBConnection dbConnection) {
-        this.dbConnection = dbConnection;
-    }
+		this.dbConnection = dbConnection;
+	}
 
 	@Override
 	public boolean salvar(UnidadeMedida unidadeMedida) {
@@ -34,13 +34,15 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar Unidade de medida", e);
 		}
+        finally {
+        	dbConnection.closeConnection();
+        }
 	}
 
 	@Override
 	public List<UnidadeMedida> exibirTodos() {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM UNIDADEMEDIDA");
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM UNIDADEMEDIDA");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<UnidadeMedida> medidas = new ArrayList<>();
 			Map<Long, UnidadeMedida> medidaMap = new HashMap<>();
@@ -54,6 +56,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			return medidas;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todas as medidas", e);
+		} finally {
+			dbConnection.closeConnection();
 		}
 	}
 

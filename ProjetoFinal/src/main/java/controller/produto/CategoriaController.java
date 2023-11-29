@@ -32,6 +32,9 @@ public class CategoriaController implements Controller<Categoria> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao salvar categoria", e);
         }
+        finally {
+        	dbConnection.closeConnection();
+        }
     }
 
     @Override
@@ -54,11 +57,13 @@ public class CategoriaController implements Controller<Categoria> {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao exibir todas as categorias", e);
         }
+        finally {
+        	dbConnection.closeConnection();
+        }
     }
 
     @Override
     public Categoria exibir(Long id) {
-       
         return null;
     }
 
