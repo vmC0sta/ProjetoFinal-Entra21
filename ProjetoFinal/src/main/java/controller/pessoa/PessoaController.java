@@ -17,12 +17,12 @@ public class PessoaController implements Controller<Pessoa> {
     }
 
     @Override
-    public Pessoa exibir() {
+    public Pessoa exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

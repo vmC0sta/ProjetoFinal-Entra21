@@ -18,12 +18,12 @@ public class EnderecoController implements Controller<Endereco> {
     }
 
     @Override
-    public Endereco exibir() {
+    public Endereco exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

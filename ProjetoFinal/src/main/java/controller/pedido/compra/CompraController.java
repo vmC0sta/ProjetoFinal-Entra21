@@ -17,12 +17,12 @@ public class CompraController implements Controller<Compra> {
     }
 
     @Override
-    public Compra exibir() {
+    public Compra exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

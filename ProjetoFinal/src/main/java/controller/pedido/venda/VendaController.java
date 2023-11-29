@@ -17,12 +17,12 @@ public class VendaController implements Controller<Venda> {
     }
 
     @Override
-    public Venda exibir() {
+    public Venda exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

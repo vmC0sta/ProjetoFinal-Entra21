@@ -64,12 +64,12 @@ public class EstoqueController implements Controller<Estoque> {
 	}
 
 	@Override
-	public Estoque exibir() {
+	public Estoque exibir(Long id) {
 		return null;
 	}
 
 	@Override
-	public void excluir() {
+	public void excluir(Long id) {
 
 	}
 }

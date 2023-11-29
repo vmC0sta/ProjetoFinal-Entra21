@@ -58,12 +58,12 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 	}
 
 	@Override
-	public UnidadeMedida exibir() {
+	public UnidadeMedida exibir(Long id) {
 		return null;
 	}
 
 	@Override
-	public void excluir() {
+	public void excluir(Long id) {
 
 	}
 }

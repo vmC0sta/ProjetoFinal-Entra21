@@ -17,12 +17,12 @@ public class EstadoController implements Controller<Estado> {
     }
 
     @Override
-    public Estado exibir() {
+    public Estado exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

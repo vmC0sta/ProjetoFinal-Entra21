@@ -17,12 +17,12 @@ public class CategoriaController implements Controller<Categoria> {
     }
 
     @Override
-    public Categoria exibir() {
+    public Categoria exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

@@ -17,12 +17,12 @@ public class ModalidadeTransporteController implements Controller<ModalidadeTran
     }
 
     @Override
-    public ModalidadeTransporte exibir() {
+    public ModalidadeTransporte exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

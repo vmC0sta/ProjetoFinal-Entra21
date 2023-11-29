@@ -16,12 +16,12 @@ public class CepController<Cep> implements Controller<Cep> {
     }
 
     @Override
-    public Cep exibir() {
+    public Cep exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }

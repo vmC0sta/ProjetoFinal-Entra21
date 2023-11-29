@@ -17,12 +17,12 @@ public class UsuarioController implements Controller<Usuario> {
     }
 
     @Override
-    public Usuario exibir() {
+    public Usuario exibir(Long id) {
         return null;
     }
 
     @Override
-    public void excluir() {
+    public void excluir(Long id) {
 
     }
 }
