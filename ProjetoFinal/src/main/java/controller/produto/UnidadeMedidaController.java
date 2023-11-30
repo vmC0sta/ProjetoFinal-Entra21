@@ -1,6 +1,7 @@
 package controller.produto;
 
 import controller.Controller;
+import model.produto.Produto;
 import model.produto.UnidadeMedida;
 
 import java.sql.Connection;
@@ -59,11 +60,38 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 
 	@Override
 	public UnidadeMedida exibir(Long id) {
-		return null;
+		
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM UNIDADEMEDIDA WHERE id = ?")) {
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			{
+				UnidadeMedida medida = new UnidadeMedida();
+				if (resultSet.next()) {
+					medida.setId(resultSet.getLong("id"));
+					medida.setDescricao(resultSet.getString("descricao"));
+					medida.setSigla(resultSet.getString("sigla"));
+				}
+				return medida;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao exibir medida", e);
+		}
+		
 	}
 
 	@Override
 	public void excluir(Long id) {
+		
+		try(
+				Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM UNIDADEMEDIDA WHERE = ?")){
+					preparedStatement.setLong(1, id);
+
+				}catch(SQLException e) {
+					throw new RuntimeException("Erro ao excluir medida o produto",e);
+				}
 
 	}
 }
