@@ -35,9 +35,6 @@ public class ProdutoController implements Controller<Produto> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar produto", e);
 		}
-        finally {
-        	dbConnection.closeConnection();
-        }
 	}
 
 	@Override
@@ -64,9 +61,6 @@ public class ProdutoController implements Controller<Produto> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os produtos", e);
 		}
-        finally {
-        	dbConnection.closeConnection();
-        }
 	}
 
 	@Override
@@ -87,22 +81,19 @@ public class ProdutoController implements Controller<Produto> {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir produto", e);
-		} finally {
-			dbConnection.closeConnection();
 		}
 	}
 
 	@Override
 	public void excluir(Long id) {
-		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")) {
-			preparedStatement.setLong(1, id);
+		try(
+				Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")){
+					preparedStatement.setLong(1, id);
 
-		} catch (SQLException e) {
-			throw new RuntimeException("Erro ao excluir o produto", e);
-		} finally {
-			dbConnection.closeConnection();
-		}
-
+				}catch(SQLException e) {
+					throw new RuntimeException("Erro ao excluir o produto",e);
+				}
+				
 	}
 }

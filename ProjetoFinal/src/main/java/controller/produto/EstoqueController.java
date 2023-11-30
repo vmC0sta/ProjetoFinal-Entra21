@@ -34,9 +34,6 @@ public class EstoqueController implements Controller<Estoque> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar no estoque", e);
 		}
-        finally {
-        	dbConnection.closeConnection();
-        }
 
 	}
 
@@ -64,9 +61,6 @@ public class EstoqueController implements Controller<Estoque> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os itens no estoque", e);
 		}
-        finally {
-        	dbConnection.closeConnection();
-        }
 	}
 
 	@Override
