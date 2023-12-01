@@ -22,7 +22,7 @@
 		ResultSet resultSet = preparedStatement.executeQuery();
 		
 		if(resultSet.next()){
-			response.sendRedirect("menu.jsp");
+				response.sendRedirect("../menu/menu.jsp");
 		}else{
 			response.sendRedirect("erroLogin.jsp");
 		}
@@ -32,16 +32,3 @@
 		response.sendRedirect("erroLogin.jsp");
     }
 %>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-				ou
-</body>
-</html>
