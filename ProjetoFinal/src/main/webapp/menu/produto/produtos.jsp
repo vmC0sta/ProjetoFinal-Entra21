@@ -14,9 +14,11 @@
 </head>
 <body>
 
-	<nav>
-       <%@include file="../menu/menu.jsp" %>
-   </nav>
+<nav>
+    <%@include file=".././menu.jsp" %>
+</nav>
+
+
    
    <main class="container">
    

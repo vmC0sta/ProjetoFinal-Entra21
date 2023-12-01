@@ -24,7 +24,7 @@
 	          <a class="nav-link" href="">Pessoa</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="../produto/produtos.jsp">Produto</a>
+	          <a class="nav-link" href="http://localhost:8080/ProjetoFinal/menu/produto/produtos.jsp">Produto</a>
 	        </li>
 	      </ul>
 	      <div class="d-flex">
