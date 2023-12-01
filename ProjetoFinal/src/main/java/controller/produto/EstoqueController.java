@@ -65,11 +65,42 @@ public class EstoqueController implements Controller<Estoque> {
 
 	@Override
 	public Estoque exibir(Long id) {
-		return null;
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"SELECT E.id, P.nome as produto, E.quantidade, E.valortotal " + "FROM estoque E "
+								+ "INNER JOIN produto P ON E.produto = P.id " + "WHERE E.id = ?");) {
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				Estoque estoque = new Estoque();
+				estoque.setId(resultSet.getLong("id"));
+
+				Produto produto = new Produto();
+				produto.setDescricao(resultSet.getString("produto"));
+				estoque.setProduto(produto);
+
+				estoque.setQuantidade(resultSet.getInt("quantidade"));
+				estoque.setValortotal(resultSet.getDouble("valortotal"));
+
+				return estoque;
+			} else {
+
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao exibir o estoque ", e);
+		}
 	}
 
 	@Override
 	public void excluir(Long id) {
-
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("DELETE FROM estoque WHERE id = ?");) {
+			preparedStatement.setLong(1, id);
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir o estoque com o ID " + id, e);
+		}
 	}
 }
