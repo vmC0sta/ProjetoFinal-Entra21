@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class MySQL implements DBConnection{
     private String URL = "jdbc:mysql://localhost:3306/mydb";
     private String USER = "root";
-    private String PASSWORD = "duda2404";
+    private String PASSWORD = "12345";
     
     
     @Override
