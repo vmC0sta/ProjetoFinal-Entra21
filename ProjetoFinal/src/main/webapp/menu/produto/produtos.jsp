@@ -46,13 +46,13 @@
 	            	 out.print("<td>"+ produto.getDescricao() +"</td>");
 	            	 out.print("<td>"+ produto.getCategoria().getDescricao() +"</td>");
 	            	 out.print("<td>"+ produto.getUnidadeMedida().getSigla() +"</td>");
-	/*             	 out.print("<td><a href='./formEditarContato.jsp?id="+p.getId()+"'>editar</a></td>");
-	 */            	 out.print("</tr>");
+	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/alteracao/alteracaoProduto/alterarProduto.jsp?id="+produto.getId()+"'>editar</a></td>");
+	            	 out.print("</tr>");
 	             }
 	           %>
 	        </tbody>
 	      </table>
-	      <span><a href="../produto/cadastroProduto/cadastrarProduto.jsp">Cadastrar produto</span>
+	      <span><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroProduto/cadastrarProduto.jsp">Cadastrar produto</span>
 	      </main>
 </body>
 </html>
