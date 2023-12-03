@@ -79,9 +79,7 @@ public class CategoriaController implements Controller<Categoria> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o Categoria", e);
 		}
-
 	}
-
 	@Override
 	public boolean editar(Long id, Categoria categoria) {
 		try (Connection connection = dbConnection.getConnection();
