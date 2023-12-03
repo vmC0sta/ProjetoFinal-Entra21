@@ -31,6 +31,7 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 						.prepareStatement("INSERT INTO UNIDADEMEDIDA (descricao,sigla) VALUES (?,?)")) {
 			preparedStatement.setString(1, unidadeMedida.getDescricao());
 			preparedStatement.setString(2, unidadeMedida.getSigla());
+			preparedStatement.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar Unidade de medida", e);
