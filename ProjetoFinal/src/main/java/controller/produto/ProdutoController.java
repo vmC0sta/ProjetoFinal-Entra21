@@ -73,25 +73,43 @@ public class ProdutoController implements Controller<Produto> {
 
 	@Override
 	public Produto exibir(Long id) {
-		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM produto WHERE ID = ?")) {
-			preparedStatement.setLong(1, id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			{
-				Produto produto = new Produto();
-				if (resultSet.next()) {
-					produto.setId(resultSet.getLong("ID"));
-					produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
-					produto.setDescricao(resultSet.getString("DESCRICAO"));
-				}
-				return produto;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Erro ao exibir produto", e);
-		}
+	    try (Connection connection = dbConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(
+	                 "SELECT A.ID, A.CODIGOREFERENCIA, A.DESCRICAO, B.ID, B.DESCRICAO, C.ID, C.DESCRICAO, C.SIGLA " +
+	                 "FROM PRODUTO A " +
+	                 "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID " +
+	                 "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID " +
+	                 "WHERE A.ID = ?")) {
+	        preparedStatement.setLong(1, id);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        Produto produto = new Produto();
+	        if (resultSet.next()) {
+	            produto.setId(resultSet.getLong("ID"));
+	            produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
+	            produto.setDescricao(resultSet.getString("DESCRICAO"));
+
+	            Categoria categoria = new Categoria();
+	            categoria.setId(resultSet.getLong("B.ID"));
+	            categoria.setDescricao(resultSet.getString("B.descricao"));
+	            produto.setCategoria(categoria);
+
+	            UnidadeMedida unidadeMedida = new UnidadeMedida();
+	            unidadeMedida.setId(resultSet.getLong("C.ID"));
+	            unidadeMedida.setDescricao(resultSet.getString("C.DESCRICAO"));
+	            unidadeMedida.setSigla(resultSet.getString("C.SIGLA"));
+	            produto.setUnidadeMedida(unidadeMedida);
+	        }
+	        return produto;
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Erro ao exibir produto", e);
+	    }
 	}
 
+	public boolean editar(Long id,Produto produto) {
+		return true;
+	}
+	
 	@Override
 	public void excluir(Long id) {
 		try(
