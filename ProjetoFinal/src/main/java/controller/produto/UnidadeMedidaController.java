@@ -91,7 +91,7 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 					preparedStatement.setLong(1, id);
 
 				}catch(SQLException e) {
-					throw new RuntimeException("Erro ao excluir medida o produto",e);
+					throw new RuntimeException("Erro ao excluir medida",e);
 				}
 
 	}
