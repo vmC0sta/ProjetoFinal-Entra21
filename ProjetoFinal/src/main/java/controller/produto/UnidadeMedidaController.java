@@ -1,7 +1,6 @@
 package controller.produto;
 
 import controller.Controller;
-import model.produto.Produto;
 import model.produto.UnidadeMedida;
 
 import java.sql.Connection;
@@ -9,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import Util.DBConnection;
 
@@ -45,7 +42,6 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 						.prepareStatement("SELECT * FROM UNIDADEMEDIDA");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<UnidadeMedida> medidas = new ArrayList<>();
-			Map<Long, UnidadeMedida> medidaMap = new HashMap<>();
 			while (resultSet.next()) {
 				UnidadeMedida medida = new UnidadeMedida();
 				medida.setId(resultSet.getLong("id"));
