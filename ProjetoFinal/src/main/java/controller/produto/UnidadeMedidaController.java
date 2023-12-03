@@ -78,16 +78,31 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public boolean excluir(Long id) {
 
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("DELETE FROM UNIDADEMEDIDA WHERE = ?")) {
+						.prepareStatement("DELETE FROM unidademedida WHERE ID = ?")) {
 			preparedStatement.setLong(1, id);
-
+			preparedStatement.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir medida", e);
 		}
 
+	}
+
+	@Override
+	public boolean editar(Long id, UnidadeMedida unidademedida) {
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE unidademedida "
+						+ "SET DESCRICAO = ?  WHERE ID=?")) {
+			preparedStatement.setString(1, unidademedida.getDescricao());
+			preparedStatement.setLong(2, id);			
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir o produto", e);
+		}
 	}
 }
