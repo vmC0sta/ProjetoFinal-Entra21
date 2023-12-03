@@ -26,11 +26,12 @@ public class ProdutoController implements Controller<Produto> {
 	public boolean salvar(Produto produto) {
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(
-						"INSERT INTO produto (CODIGOREFERENNCIA,DESCRICAO,CATEGORIA,UNIDADEMEDIDA) VALUES (?,?,?,?)")) {
+						"INSERT INTO produto (CODIGOREFERENCIA,DESCRICAO,CATEGORIA_ID,UNIDADEMEDIDA_ID) VALUES (?,?,?,?)")) {
 			preparedStatement.setString(1, produto.getCodigoReferencia());
 			preparedStatement.setString(2, produto.getDescricao());
 			preparedStatement.setLong(3, produto.getCategoria().getId());
 			preparedStatement.setLong(4, produto.getUnidadeMedida().getId());
+			preparedStatement.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar produto", e);
@@ -40,10 +41,13 @@ public class ProdutoController implements Controller<Produto> {
 	@Override
 	public List<Produto> exibirTodos() {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM produto");
-				ResultSet resultSet = preparedStatement.executeQuery()) {
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT A.ID,A.CODIGOREFERENCIA,A.DESCRICAO,B.ID,B.DESCRICAO,C.ID,C.DESCRICAO,C.SIGLA\r\n"
+						+ "FROM PRODUTO A \r\n"
+						+ "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID\r\n"
+						+ "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID");
+				ResultSet resultSet = preparedStatement.executeQuery()) 
+		{
 			List<Produto> produtos = new ArrayList<>();
-			Map<Long, Produto> produtoMap = new HashMap<>();
 			while (resultSet.next()) {
 				Produto produto = new Produto();
 				produto.setId(resultSet.getLong("ID"));
@@ -51,10 +55,16 @@ public class ProdutoController implements Controller<Produto> {
 				produto.setDescricao(resultSet.getString("DESCRICAO"));
 
 				Categoria categoria = new Categoria();
-				categoria.setId(resultSet.getLong("ID"));
-				categoria.setDescricao(resultSet.getString("descricao"));
+				categoria.setId(resultSet.getLong("B.ID"));
+				categoria.setDescricao(resultSet.getString("B.descricao"));
 				produto.setCategoria(categoria);
-
+				
+				UnidadeMedida unidadeMedida = new UnidadeMedida();
+				unidadeMedida.setId(resultSet.getLong("C.ID"));
+				unidadeMedida.setDescricao(resultSet.getString("C.DESCRICAO"));
+				unidadeMedida.setSigla(resultSet.getString("C.SIGLA"));
+				produto.setUnidadeMedida(unidadeMedida);
+				
 				produtos.add(produto);
 			}
 			return produtos;
