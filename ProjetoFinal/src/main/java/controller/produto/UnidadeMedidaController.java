@@ -13,12 +13,12 @@ import java.util.List;
 import Util.DBConnection;
 
 public class UnidadeMedidaController implements Controller<UnidadeMedida> {
-	
-    private DBConnection dbConnection;
+
+	private DBConnection dbConnection;
 
 	public UnidadeMedidaController(DBConnection dbConnection) {
-        this.dbConnection = dbConnection;
-    }
+		this.dbConnection = dbConnection;
+	}
 
 	@Override
 	public boolean salvar(UnidadeMedida unidadeMedida) {
@@ -38,8 +38,7 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 	@Override
 	public List<UnidadeMedida> exibirTodos() {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM UNIDADEMEDIDA");
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM UNIDADEMEDIDA");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<UnidadeMedida> medidas = new ArrayList<>();
 			while (resultSet.next()) {
@@ -57,38 +56,38 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 
 	@Override
 	public UnidadeMedida exibir(Long id) {
-		
+
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM UNIDADEMEDIDA WHERE id = ?")) {
+						.prepareStatement("SELECT ID,DESCRICAO,SIGLA FROM unidademedida WHERE id = ?")) {
 			preparedStatement.setLong(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			{
-				UnidadeMedida medida = new UnidadeMedida();
+				UnidadeMedida unidadeMedida = new UnidadeMedida();
 				if (resultSet.next()) {
-					medida.setId(resultSet.getLong("id"));
-					medida.setDescricao(resultSet.getString("descricao"));
-					medida.setSigla(resultSet.getString("sigla"));
+					unidadeMedida.setId(resultSet.getLong("id"));
+					unidadeMedida.setDescricao(resultSet.getString("descricao"));
+					unidadeMedida.setSigla(resultSet.getString("sigla"));
 				}
-				return medida;
+				return unidadeMedida;
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir medida", e);
 		}
-		
+
 	}
 
 	@Override
 	public void excluir(Long id) {
-		
-		try(
-				Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM UNIDADEMEDIDA WHERE = ?")){
-					preparedStatement.setLong(1, id);
 
-				}catch(SQLException e) {
-					throw new RuntimeException("Erro ao excluir medida",e);
-				}
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("DELETE FROM UNIDADEMEDIDA WHERE = ?")) {
+			preparedStatement.setLong(1, id);
+
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir medida", e);
+		}
 
 	}
 }
