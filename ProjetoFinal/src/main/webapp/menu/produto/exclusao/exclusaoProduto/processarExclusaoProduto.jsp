@@ -9,5 +9,7 @@
 	DBConnection dbConnection = new MySQL();
 	ProdutoController produtoController = new ProdutoController(dbConnection);
 	String id = request.getParameter("id");
-	if(produtoController.excluir(Long.parseLong(id)));
+	if(produtoController.excluir(Long.parseLong(id))){
+		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/produtos.jsp");
+	}
 %>
