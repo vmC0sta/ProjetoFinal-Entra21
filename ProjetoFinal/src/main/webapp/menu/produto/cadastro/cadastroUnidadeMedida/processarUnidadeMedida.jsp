@@ -18,7 +18,7 @@
 	unidadeMedida.setSigla(sigla);
 	
 	if(unidadeMedidaController.salvar(unidadeMedida)){
-		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/cadastroProduto/cadastrarProduto.jsp");
+		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroProduto/cadastrarProduto.jsp");
 	}
 
 %>

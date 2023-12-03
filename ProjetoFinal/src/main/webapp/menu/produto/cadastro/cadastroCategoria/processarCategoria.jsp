@@ -15,7 +15,7 @@
 	categoria.setDescricao(descricao);
 	
 	if(categoriaController.salvar(categoria)){
-		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/cadastroProduto/cadastrarProduto.jsp");
+		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroProduto/cadastrarProduto.jsp");
 	}
 
 %>
