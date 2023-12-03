@@ -47,7 +47,7 @@
 	           %>
 	        </tbody>
 	      </table>
-	      <span><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroProduto/cadastrarProduto.jsp">Cadastrar produto</span>
+	      <span><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroCategoria/cadastrarCategoria.jsp">Cadastrar categoria</span>
 	      </main>
 </body>
 </html>
