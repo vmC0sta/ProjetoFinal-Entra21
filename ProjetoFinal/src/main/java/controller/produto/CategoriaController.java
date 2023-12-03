@@ -53,36 +53,45 @@ public class CategoriaController implements Controller<Categoria> {
 
 	@Override
 	public Categoria exibir(Long id) {
-		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM categoria WHERE id = ?");) {
-			preparedStatement.setLong(1, id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			if (resultSet.next()) {
-				Categoria categoria = new Categoria();
-				categoria.setId(resultSet.getLong("id"));
-				categoria.setDescricao(resultSet.getString("descricao"));
-
-				return categoria;
-			} else {
-
-				return null;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Erro ao exibir a categoria com o ID " + id, e);
-		}
+	    try (Connection connection = dbConnection.getConnection();
+	            PreparedStatement preparedStatement = connection
+	                    .prepareStatement("SELECT ID,DESCRICAO FROM categoria WHERE id = ?");) {
+	        preparedStatement.setLong(1, id);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        Categoria categoria = new Categoria();
+	        if (resultSet.next()) {
+	            categoria.setId(resultSet.getLong("id"));
+	            categoria.setDescricao(resultSet.getString("descricao"));
+	        }
+	        return categoria;
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Erro ao exibir categoria " + e);
+	    }
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public boolean excluir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Categoria WHERE = ?")) {
 			preparedStatement.setLong(1, id);
-
+			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o Categoria", e);
 		}
 
+	}
+
+	@Override
+	public boolean editar(Long id, Categoria categoria) {
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categoria "
+						+ "SET DESCRICAO = ?  WHERE ID=?")) {
+			preparedStatement.setString(1, categoria.getDescricao());
+			preparedStatement.setLong(2, id);			
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir o produto", e);
+		}
 	}
 }
