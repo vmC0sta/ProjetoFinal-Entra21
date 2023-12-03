@@ -39,12 +39,11 @@ public class ProdutoController implements Controller<Produto> {
 	@Override
 	public List<Produto> exibirTodos() {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT A.ID,A.CODIGOREFERENCIA,A.DESCRICAO,B.ID,B.DESCRICAO,C.ID,C.DESCRICAO,C.SIGLA\r\n"
-						+ "FROM PRODUTO A \r\n"
-						+ "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID\r\n"
-						+ "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID");
-				ResultSet resultSet = preparedStatement.executeQuery()) 
-		{
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"SELECT A.ID,A.CODIGOREFERENCIA,A.DESCRICAO,B.ID,B.DESCRICAO,C.ID,C.DESCRICAO,C.SIGLA\r\n"
+								+ "FROM PRODUTO A \r\n" + "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID\r\n"
+								+ "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<Produto> produtos = new ArrayList<>();
 			while (resultSet.next()) {
 				Produto produto = new Produto();
@@ -56,13 +55,13 @@ public class ProdutoController implements Controller<Produto> {
 				categoria.setId(resultSet.getLong("B.ID"));
 				categoria.setDescricao(resultSet.getString("B.descricao"));
 				produto.setCategoria(categoria);
-				
+
 				UnidadeMedida unidadeMedida = new UnidadeMedida();
 				unidadeMedida.setId(resultSet.getLong("C.ID"));
 				unidadeMedida.setDescricao(resultSet.getString("C.DESCRICAO"));
 				unidadeMedida.setSigla(resultSet.getString("C.SIGLA"));
 				produto.setUnidadeMedida(unidadeMedida);
-				
+
 				produtos.add(produto);
 			}
 			return produtos;
@@ -73,53 +72,62 @@ public class ProdutoController implements Controller<Produto> {
 
 	@Override
 	public Produto exibir(Long id) {
-	    try (Connection connection = dbConnection.getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement(
-	                 "SELECT A.ID, A.CODIGOREFERENCIA, A.DESCRICAO, B.ID, B.DESCRICAO, C.ID, C.DESCRICAO, C.SIGLA " +
-	                 "FROM PRODUTO A " +
-	                 "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID " +
-	                 "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID " +
-	                 "WHERE A.ID = ?")) {
-	        preparedStatement.setLong(1, id);
-	        ResultSet resultSet = preparedStatement.executeQuery();
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"SELECT A.ID, A.CODIGOREFERENCIA, A.DESCRICAO, B.ID, B.DESCRICAO, C.ID, C.DESCRICAO, C.SIGLA "
+								+ "FROM PRODUTO A " + "INNER JOIN CATEGORIA B ON B.ID = A.CATEGORIA_ID "
+								+ "INNER JOIN unidademedida C ON C.ID = A.UNIDADEMEDIDA_ID " + "WHERE A.ID = ?")) {
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        Produto produto = new Produto();
-	        if (resultSet.next()) {
-	            produto.setId(resultSet.getLong("ID"));
-	            produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
-	            produto.setDescricao(resultSet.getString("DESCRICAO"));
+			Produto produto = new Produto();
+			if (resultSet.next()) {
+				produto.setId(resultSet.getLong("ID"));
+				produto.setCodigoReferencia(resultSet.getString("CODIGOREFERENCIA"));
+				produto.setDescricao(resultSet.getString("DESCRICAO"));
 
-	            Categoria categoria = new Categoria();
-	            categoria.setId(resultSet.getLong("B.ID"));
-	            categoria.setDescricao(resultSet.getString("B.descricao"));
-	            produto.setCategoria(categoria);
+				Categoria categoria = new Categoria();
+				categoria.setId(resultSet.getLong("B.ID"));
+				categoria.setDescricao(resultSet.getString("B.descricao"));
+				produto.setCategoria(categoria);
 
-	            UnidadeMedida unidadeMedida = new UnidadeMedida();
-	            unidadeMedida.setId(resultSet.getLong("C.ID"));
-	            unidadeMedida.setDescricao(resultSet.getString("C.DESCRICAO"));
-	            unidadeMedida.setSigla(resultSet.getString("C.SIGLA"));
-	            produto.setUnidadeMedida(unidadeMedida);
-	        }
-	        return produto;
-	    } catch (SQLException e) {
-	        throw new RuntimeException("Erro ao exibir produto", e);
-	    }
+				UnidadeMedida unidadeMedida = new UnidadeMedida();
+				unidadeMedida.setId(resultSet.getLong("C.ID"));
+				unidadeMedida.setDescricao(resultSet.getString("C.DESCRICAO"));
+				unidadeMedida.setSigla(resultSet.getString("C.SIGLA"));
+				produto.setUnidadeMedida(unidadeMedida);
+			}
+			return produto;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao exibir produto", e);
+		}
 	}
 
-	public boolean editar(Long id,Produto produto) {
-		return true;
+	public boolean editar(Long id, Produto produto) {
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE produto "
+						+ "SET CODIGOREFERENCIA=?, DESCRICAO=?, CATEGORIA_id=?, UNIDADEMEDIDA_id=? " + "WHERE ID=?")) {
+			preparedStatement.setString(1, produto.getCodigoReferencia());
+			preparedStatement.setString(2, produto.getDescricao());
+			preparedStatement.setLong(3, produto.getCategoria().getId());
+			preparedStatement.setLong(4, produto.getUnidadeMedida().getId());
+			preparedStatement.setLong(5, id);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir o produto", e);
+		}
 	}
-	
+
 	@Override
 	public void excluir(Long id) {
-		try(
-				Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")){
-					preparedStatement.setLong(1, id);
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")) {
+			preparedStatement.setLong(1, id);
 
-				}catch(SQLException e) {
-					throw new RuntimeException("Erro ao excluir o produto",e);
-				}
-				
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir o produto", e);
+		}
+
 	}
 }
