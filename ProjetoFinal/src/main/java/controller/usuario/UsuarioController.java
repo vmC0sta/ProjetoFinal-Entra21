@@ -3,16 +3,13 @@ package controller.usuario;
 import controller.Controller;
 import model.usuario.Usuario;
 import model.pessoa.*;
-import model.produto.Produto;
 import model.endereco.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import Util.DBConnection;
 
@@ -44,7 +41,6 @@ public class UsuarioController implements Controller<Usuario> {
 				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USUARIO");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<Usuario> usuarios = new ArrayList<>();
-			Map<Long, Usuario> usuarioMap = new HashMap<>();
 			while (resultSet.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setId(resultSet.getLong("ID"));
