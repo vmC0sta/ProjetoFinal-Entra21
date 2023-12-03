@@ -47,6 +47,7 @@
 	            	 out.print("<td>"+ produto.getCategoria().getDescricao() +"</td>");
 	            	 out.print("<td>"+ produto.getUnidadeMedida().getSigla() +"</td>");
 	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/alteracao/alteracaoProduto/alterarProduto.jsp?id="+produto.getId()+"'>editar</a></td>");
+	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/exclusao/exclusaoProduto/processarExclusaoProduto.jsp?id="+produto.getId()+"'>editar</a></td>");
 	            	 out.print("</tr>");
 	             }
 	           %>

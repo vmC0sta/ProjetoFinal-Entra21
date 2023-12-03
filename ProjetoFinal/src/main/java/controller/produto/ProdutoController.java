@@ -120,11 +120,11 @@ public class ProdutoController implements Controller<Produto> {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public boolean excluir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")) {
 			preparedStatement.setLong(1, id);
-
+			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o produto", e);
 		}
