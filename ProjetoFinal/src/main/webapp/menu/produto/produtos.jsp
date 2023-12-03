@@ -44,8 +44,8 @@
 	            	 out.print("<td>"+ produto.getId() +"</td>");
 	            	 out.print("<td>"+ produto.getCodigoReferencia()+"</td>");
 	            	 out.print("<td>"+ produto.getDescricao() +"</td>");
-	            	 out.print("<td>"+ produto.getCategoria() +"</td>");
-	            	 out.print("<td>"+ produto.getUnidadeMedida() +"</td>");
+	            	 out.print("<td>"+ produto.getCategoria().getDescricao() +"</td>");
+	            	 out.print("<td>"+ produto.getUnidadeMedida().getSigla() +"</td>");
 	/*             	 out.print("<td><a href='./formEditarContato.jsp?id="+p.getId()+"'>editar</a></td>");
 	 */            	 out.print("</tr>");
 	             }
