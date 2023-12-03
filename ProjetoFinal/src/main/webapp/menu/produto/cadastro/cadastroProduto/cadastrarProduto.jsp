@@ -36,7 +36,7 @@
 			<form action="processarProduto.jsp" method="POST">
 				<div class="form-row">
 
-					<div class="form-group col-md-6" style="margin: 1rem 90">
+					<div class="form-group col-md-6" style="margin: 1rem 0">
 						<label for="codigoReferencia" style="font-weight: bolder">Código de Referência</label> 
 							<input type="text" class="form-control" id="codigoReferencia" placeholder="Código de Referência" name="codigoReferencia">
 					</div>
@@ -58,7 +58,8 @@
                                 out.print("<option value=\"" + categoria.getId() + "\">" + categoria.getDescricao() + "</option>");
                             }
                         %>
-					</select> <small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastroCategoria/cadastrarCategoria.jsp">Cadastrar Categoria</a></small>
+					</select> 
+					<small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroCategoria/cadastrarCategoria.jsp">Cadastrar Categoria</a></small>
 				</div>
 
 				<div class="form-group col-md-6" style="margin: 1rem 0">
@@ -73,7 +74,7 @@
 						
 						
 					</select> 
-					<small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastroUnidadeMedida/cadastrarUnidadeMedida.jsp">Cadastrar Unidade de Medida</a></small>
+					<small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroUnidadeMedida/cadastrarUnidadeMedida.jsp">Cadastrar Unidade de Medida</a></small>
 				</div>
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
