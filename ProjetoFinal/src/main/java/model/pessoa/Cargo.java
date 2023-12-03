@@ -1,18 +1,17 @@
-package model.endereco;
+package model.pessoa;
 
-public class Municipio {
+public class Cargo{
+	
     private Long id;
     private String descricao;
-    private Estado estado;
-
-    public Municipio() {
-    }
-
-    public Municipio(String descricao, Estado estado) {
-        this.descricao = descricao;
-        this.estado = estado;
+    
+    public Cargo() {
     }
     
+    public Cargo(String descricao) {
+        this.descricao = descricao;
+    }
+
     public Long getId() {
         return id;
     }
@@ -28,21 +27,13 @@ public class Municipio {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
 
     @Override
     public String toString() {
-        return "Municipio{" +
+        return "Cargo{" +
                 "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                ", estado=" + estado +
+                ", cargo='" + descricao +
                 '}';
     }
+	
 }

@@ -10,19 +10,19 @@ public class Pessoa {
     private String telefone;
     private String celular;
     private String informacaoComplementar;
-    private TipoFuncao tIpoFuncao;
+    private Cargo cargo;
     private String email;
     private Endereco endereco;
     public Pessoa() {
     }
-    public Pessoa(String nome, TipoPessoa tipoPessoa, String identificacao, String telefone, String celular, String informacaoComplementar, TipoFuncao tIpoFuncao, String email, Endereco endereco) {
+    public Pessoa(String nome, TipoPessoa tipoPessoa, String identificacao, String telefone, String celular, String informacaoComplementar, Cargo cargo, String email, Endereco endereco) {
         this.nome = nome;
         this.tipoPessoa = tipoPessoa;
         Identificacao = identificacao;
         this.telefone = telefone;
         this.celular = celular;
         this.informacaoComplementar = informacaoComplementar;
-        this.tIpoFuncao = tIpoFuncao;
+        this.cargo = cargo;
         this.email = email;
         this.endereco = endereco;
     }
@@ -83,12 +83,12 @@ public class Pessoa {
         this.informacaoComplementar = informacaoComplementar;
     }
 
-    public TipoFuncao gettIpoFuncao() {
-        return tIpoFuncao;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void settIpoFuncao(TipoFuncao tIpoFuncao) {
-        this.tIpoFuncao = tIpoFuncao;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public String getEmail() {
@@ -116,7 +116,7 @@ public class Pessoa {
                 ", telefone='" + telefone + '\'' +
                 ", celular='" + celular + '\'' +
                 ", informacaoComplementar='" + informacaoComplementar + '\'' +
-                ", tIpoFuncao=" + tIpoFuncao +
+                ", cargo=" + cargo +
                 ", email='" + email + '\'' +
                 ", endereco=" + endereco +
                 '}';
