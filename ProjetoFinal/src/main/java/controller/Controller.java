@@ -6,6 +6,7 @@ public interface Controller <T>{
     boolean salvar(T t);
     List<T> exibirTodos();
     T exibir(Long id);
+    boolean editar(Long id, T t);
     void excluir(Long id);
 }
 
