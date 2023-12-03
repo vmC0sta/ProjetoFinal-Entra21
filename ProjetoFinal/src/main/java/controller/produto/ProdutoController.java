@@ -122,7 +122,7 @@ public class ProdutoController implements Controller<Produto> {
 	@Override
 	public boolean excluir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE = ?")) {
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM produto WHERE ID = ?")) {
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
 			return true;
