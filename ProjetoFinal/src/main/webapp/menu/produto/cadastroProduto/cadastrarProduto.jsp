@@ -33,51 +33,43 @@
 		<h1 style="margin: 1.5rem 0">Cadastrar Produto</h1>
 
 		<div class="container mt-5">
-			<form>
+			<form action="processarProduto.jsp" method="POST">
 				<div class="form-row">
 
-					<div class="form-group col-md-6" style="margin: 1rem 0">
-						<label for="id" style="font-weight: bolder">Código</label> <input
-							type="text" class="form-control" id="id" placeholder="Código">
-					</div>
-
 					<div class="form-group col-md-6" style="margin: 1rem 90">
-						<label for="codigoReferencia" style="font-weight: bolder">Código
-							de Referência</label> <input type="text" class="form-control"
-							id="codigoReferencia" placeholder="Código de Referência">
+						<label for="codigoReferencia" style="font-weight: bolder">Código de Referência</label> 
+							<input type="text" class="form-control" id="codigoReferencia" placeholder="Código de Referência" name="codigoReferencia">
 					</div>
 
 
 				<div class="form-group" style="margin: 1rem 0">
 					<label for="descricao" style="font-weight: bolder">Descrição</label>
-					<input type="text" class="form-control" id="descricao"
-						placeholder="Descrição">
+					<input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao">
 				</div>
 
 
 				<div class="form-group col-md-6" style="margin: 1rem 0">
 					<label for="categoria" style="font-weight: bolder">Categoria</label>
-					<select class="form-control" id="categoria">
+					<select class="form-control" id="categoria" name="categoria">
 					
-					<%
-		             	List<Categoria> categorias = categoriaController.exibirTodos();
-		             	for(Categoria categoria : categorias){
-		             		out.print("<option value=\"" + categoria.getId() + "\">" + categoria.getDescricao() + "</option>");
-		             	}
-					%>
+                       <%
+                            List<Categoria> categorias = categoriaController.exibirTodos();
+                            for (Categoria categoria : categorias) {
+                                out.print("<option value=\"" + categoria.getId() + "\">" + categoria.getDescricao() + "</option>");
+                            }
+                        %>
 					</select> <small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastroCategoria/cadastrarCategoria.jsp">Cadastrar Categoria</a></small>
 				</div>
 
 				<div class="form-group col-md-6" style="margin: 1rem 0">
-					<label for="unidadeMedida" style="font-weight: bolder">Unidade
-						de Medida</label> 
-						<select class="form-control" id="unidadeMedida">
-						<%
-		             	List<UnidadeMedida> unidadesMedida= unidadeMedidaController.exibirTodos();
-		             	for(UnidadeMedida unidademedida: unidadesMedida){
-		             		out.print("<option value=\"" + unidademedida.getId() + "\">" + unidademedida.getSigla() + "</option>");
-		             	}
-					%>
+					<label for="unidadeMedida" style="font-weight: bolder">Unidade de Medida</label> 
+						<select class="form-control" id="unidadeMedida" name="unidadeMedida">
+                       <%
+                            List<UnidadeMedida> unidadesMedida = unidadeMedidaController.exibirTodos();
+                            for (UnidadeMedida unidadeMedida : unidadesMedida) {
+                                out.print("<option value=\"" + unidadeMedida.getId() + "\">" + unidadeMedida.getSigla() + "</option>");
+                            }
+                        %>
 						
 						
 					</select> 
