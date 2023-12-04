@@ -30,8 +30,6 @@
 	               <th>Código</th>
 	               <th>Usuario</th>
 	               <th>Nome</th>
-	               <th>Documento</th>
-	               <th>Contato</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -44,8 +42,6 @@
 	            	 out.print("<td>"+ usuario.getId() +"</td>");
 	            	 out.print("<td>"+ usuario.getNome()+"</td>");
 	            	 out.print("<td>"+ usuario.getPessoa().getNome() +"</td>");
-	            	 out.print("<td>"+ usuario.getPessoa().getIdentificacao() +"</td>");
-	            	 out.print("<td>"+ usuario.getPessoa().getCelular() +"</td>");
 	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/alteracao/alteracaoProduto/alterarProduto.jsp?id="+usuario.getId()+"'>editar</a></td>");
 	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/exclusao/exclusaoProduto/processarExclusaoProduto.jsp?id="+usuario.getId()+"'>excluir</a></td>");
 	            	 out.print("</tr>");

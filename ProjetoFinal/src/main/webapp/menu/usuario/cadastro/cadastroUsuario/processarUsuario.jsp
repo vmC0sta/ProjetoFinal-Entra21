@@ -2,7 +2,8 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="Util.DBConnection" %>
 <%@ page import="Util.MySQL" %>
-<%@ page import="controller.usuario.*" %>
+<%@ page import="controller.usuario.UsuarioController" %>
+<%@ page import="model.pessoa.*" %>
 <%@ page import="model.usuario.*" %>
 
 <%
@@ -11,15 +12,17 @@
 	String pessoaId = request.getParameter("pessoa");
 
 	MySQL dbConnection = new MySQL();
-	UusuarioController usuarioController = new usuarioController(dbConnection);
+	UsuarioController usuarioController = new UsuarioController(dbConnection);
 	
 	Usuario usuario = new Usuario();
-	usuario.setDescricao(nome);
-	usuario.setSigla(senha);
-	usuario.setPessoa(pessoaId)
+	usuario.setNome(nome);
+	usuario.setSenha(senha);
+	Pessoa pessoa = new Pessoa();
+	pessoa.setId(Long.parseLong(pessoaId));
+	usuario.setPessoa(pessoa);
 	
 	if(usuarioController.salvar(usuario)){
-		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroProduto/cadastrarUsuario.jsp");
+		response.sendRedirect("http://localhost:8080/ProjetoFinal/menu/usuario/usuarios.jsp");
 	}
 
 %>

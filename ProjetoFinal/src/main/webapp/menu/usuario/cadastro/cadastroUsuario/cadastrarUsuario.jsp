@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.endereco.*"%>
 <%@ page import="model.pessoa.*"%>
-<%@ page import="controller.pessoa.*"%>
+<%@ page import="controller.pessoa.PessoaController"%>
 <%@ page import="Util.DBConnection" %>
 <%@ page import="Util.MySQL" %>
 <%@ page import="java.util.*" %>
@@ -35,29 +35,28 @@
 				<div class="form-row">
 
 					<div class="form-group col-md-6" style="margin: 1rem 0">
-						<label for="codigoReferencia" style="font-weight: bolder">Nome de usuario</label> 
-							<input type="text" class="form-control" id="codigoReferencia" placeholder="Código de Referência" name="codigoReferencia">
+						<label for="codigoReferencia" style="font-weight: bolder">Inform o nome de usuario:</label> 
+							<input type="text" class="form-control" id="codigoReferencia" placeholder="nome de usuario" name="nome">
 					</div>
 
 
 				<div class="form-group" style="margin: 1rem 0">
-					<label for="descricao" style="font-weight: bolder">Senha</label>
-					<input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao">
+					<label for="descricao" style="font-weight: bolder">Informe a senha:</label>
+					<input type="password" class="form-control" id="descricao" placeholder="senha" name="senha">
 				</div>
 
 
 				<div class="form-group col-md-6" style="margin: 1rem 0">
 					<label for="categoria" style="font-weight: bolder">Pessoa</label>
-					<select class="form-control" id="categoria" name="categoria">
+					<select class="form-control" id="categoria" name="pessoa">
 					
                        <%
-                            List<Pessoa> pessoas = PessoaController.exibirTodos();
+                            List<Pessoa> pessoas = pessoaController.exibirTodos();
                             for (Pessoa pessoa : pessoas) {
                                 out.print("<option value=\"" + pessoa.getId() + "\">" + pessoa.getNome() + "</option>");
                             }
                         %>
 					</select> 
-					<small class="form-text text-muted"><a href="http://localhost:8080/ProjetoFinal/menu/produto/cadastro/cadastroCategoria/cadastrarCategoria.jsp">Cadastrar Categoria</a></small>
 				</div>
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			</form>
