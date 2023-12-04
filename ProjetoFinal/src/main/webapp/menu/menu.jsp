@@ -14,7 +14,7 @@
 <body>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="javascript:void(0)">Lorem</a>
+			<a class="navbar-brand" href="javascript:void(0)">Elevate</a>
 			<div class="collapse navbar-collapse" id="mynavbar">
 				<ul class="navbar-nav me-auto">
 				

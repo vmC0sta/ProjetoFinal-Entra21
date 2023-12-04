@@ -100,7 +100,8 @@ public class UsuarioController implements Controller<Usuario> {
 	public boolean excluir(Long id) {
 
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USUARIO WHERE ID = ?")) {
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE"
+						+ " FROM USUARIO WHERE ID = ?")) {
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
 			return true;
@@ -109,7 +110,6 @@ public class UsuarioController implements Controller<Usuario> {
 		}finally {
 			dbConnection.closeConnection();
 		}
-
 	}
 
 	@Override
