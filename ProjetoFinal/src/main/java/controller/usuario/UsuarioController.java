@@ -130,15 +130,22 @@ public class UsuarioController implements Controller<Usuario> {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public boolean excluir(Long id) {
 
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM USUARIO WHERE ID = ?")) {
 			preparedStatement.setLong(1, id);
-
+			preparedStatement.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir usuario", e);
 		}
 
+	}
+
+	@Override
+	public boolean editar(Long id, Usuario t) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

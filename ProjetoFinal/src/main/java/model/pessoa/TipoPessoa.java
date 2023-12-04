@@ -1,8 +1,8 @@
 package model.pessoa;
 
 public enum TipoPessoa {
-    CNPJ(1),
-    CPF(2),;
+    CNPJ(0),
+    CPF(1),;
 	
     private final int valor;
 

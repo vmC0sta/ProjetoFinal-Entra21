@@ -19,7 +19,7 @@
 				<ul class="navbar-nav me-auto">
 				
 					<li class="nav-item"><a class="nav-link"
-						href="javascript:void(0)">Usuário</a>
+						href="http://localhost:8080/ProjetoFinal/menu/usuario/usuarios.jsp">Usuário</a>
 					</li>
 					
 					<li class="nav-item"><a class="nav-link" href="">Pessoa</a></li>
