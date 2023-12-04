@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.endereco.*"%>
 <%@ page import="model.pessoa.*"%>
 <%@ page import="controller.pessoa.PessoaController"%>
 <%@ page import="Util.DBConnection" %>
@@ -35,20 +34,20 @@
 				<div class="form-row">
 
 					<div class="form-group col-md-6" style="margin: 1rem 0">
-						<label for="codigoReferencia" style="font-weight: bolder">Inform o nome de usuario:</label> 
-							<input type="text" class="form-control" id="codigoReferencia" placeholder="nome de usuario" name="nome">
+						<label for="codigoReferencia" style="font-weight: bolder">Nome de usuario</label> 
+							<input type="text" class="form-control" id="nome" placeholder="Nome de usuario" name="nome">
 					</div>
 
 
 				<div class="form-group" style="margin: 1rem 0">
-					<label for="descricao" style="font-weight: bolder">Informe a senha:</label>
-					<input type="password" class="form-control" id="descricao" placeholder="senha" name="senha">
+					<label for="descricao" style="font-weight: bolder">Senha</label>
+					<input type="password" class="form-control" id="senha" placeholder="Senha" name="senha">
 				</div>
 
 
 				<div class="form-group col-md-6" style="margin: 1rem 0">
 					<label for="categoria" style="font-weight: bolder">Pessoa</label>
-					<select class="form-control" id="categoria" name="pessoa">
+					<select class="form-control" id="pessoa" name="pessoa">
 					
                        <%
                             List<Pessoa> pessoas = pessoaController.exibirTodos();

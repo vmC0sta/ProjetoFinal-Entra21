@@ -8,7 +8,6 @@
 	
 	
 	<% 	
-			
 		   DBConnection dbConnection = new MySQL(); 
 		   String id = request.getParameter("id");
 		   Categoria categoria = new CategoriaController(dbConnection).exibir(Long.parseLong(id));

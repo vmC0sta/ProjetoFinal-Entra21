@@ -3,7 +3,6 @@ package controller.usuario;
 import controller.Controller;
 import model.usuario.Usuario;
 import model.pessoa.*;
-import model.endereco.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,9 +38,9 @@ public class UsuarioController implements Controller<Usuario> {
 	@Override
 	public List<Usuario> exibirTodos() {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(
-						"SELECT A.ID,A.NOME,A.SENHA,B.NOME\r\n"
-								+ "FROM USUARIO A \r\n" + "INNER JOIN pessoa B ON B.ID = A.PESSOA_id\r\n");
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT A.ID,A.NOME,A.SENHA,B.NOME\r\n" + "FROM USUARIO A \r\n"
+								+ "INNER JOIN pessoa B ON B.ID = A.PESSOA_id\r\n");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 			List<Usuario> usuarios = new ArrayList<>();
 			while (resultSet.next()) {
@@ -67,20 +66,24 @@ public class UsuarioController implements Controller<Usuario> {
 	public Usuario exibir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM USUARIO WHERE ID = ?")) {
+						.prepareStatement("SELECT A.ID,A.NOME,A.SENHA,B.ID,B.NOME FROM USUARIO A INNER JOIN PESSOA B ON B.ID = A.PESSOA_ID WHERE a.ID = ?")) {
 			preparedStatement.setLong(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			{
-				Usuario usuario = new Usuario();
-				if (resultSet.next()) {
+			Usuario usuario = new Usuario();
+			if (resultSet.next()) {
 
-					usuario.setId(resultSet.getLong("ID"));
-					usuario.setNome(resultSet.getString("NOME"));
-					usuario.setSenha(resultSet.getString("SENHA"));
+				usuario.setId(resultSet.getLong("A.ID"));
+				usuario.setNome(resultSet.getString("A.NOME"));
+				usuario.setSenha(resultSet.getString("A.SENHA"));
+				
+				Pessoa pessoa = new Pessoa();
+				pessoa.setId(resultSet.getLong("B.ID"));
+				pessoa.setNome(resultSet.getString("B.NOME"));
+				usuario.setPessoa(pessoa);
 
-				}
-				return usuario;
 			}
+			return usuario;
+
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir usuario", e);
 		}
@@ -102,10 +105,10 @@ public class UsuarioController implements Controller<Usuario> {
 
 	@Override
 	public boolean editar(Long id, Usuario usuario) {
-		
+
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario "
-						+ "SET NOME=?, SENHA=?, PESSOA_id=?" + "WHERE ID=?")) {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("UPDATE usuario " + "SET NOME=?, SENHA=?, PESSOA_id=? " + "WHERE ID=?")) {
 			preparedStatement.setString(1, usuario.getNome());
 			preparedStatement.setString(2, usuario.getSenha());
 			preparedStatement.setLong(3, usuario.getPessoa().getId());
