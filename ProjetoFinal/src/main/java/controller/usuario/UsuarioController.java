@@ -101,8 +101,19 @@ public class UsuarioController implements Controller<Usuario> {
 	}
 
 	@Override
-	public boolean editar(Long id, Usuario t) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean editar(Long id, Usuario usuario) {
+		
+		try (Connection connection = dbConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE usuario "
+						+ "SET NOME=?, SENHA=?, PESSOA_id=?" + "WHERE ID=?")) {
+			preparedStatement.setString(1, usuario.getNome());
+			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.setLong(3, usuario.getPessoa().getId());
+			preparedStatement.setLong(4, id);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao editar usuario", e);
+		}
 	}
 }
