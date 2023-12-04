@@ -32,6 +32,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar Unidade de medida", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -51,6 +53,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			return medidas;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todas as medidas", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -73,6 +77,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir medida", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 
 	}
@@ -88,6 +94,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir medida", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 
 	}
@@ -103,6 +111,8 @@ public class UnidadeMedidaController implements Controller<UnidadeMedida> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 }

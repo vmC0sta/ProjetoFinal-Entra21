@@ -33,6 +33,9 @@ public class UsuarioController implements Controller<Usuario> {
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar usuario", e);
 		}
+		finally {
+			dbConnection.closeConnection();
+		}
 	}
 
 	@Override
@@ -59,6 +62,8 @@ public class UsuarioController implements Controller<Usuario> {
 			return usuarios;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os Usuarios", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -86,6 +91,8 @@ public class UsuarioController implements Controller<Usuario> {
 
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir usuario", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -99,13 +106,14 @@ public class UsuarioController implements Controller<Usuario> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir usuario", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 
 	}
 
 	@Override
 	public boolean editar(Long id, Usuario usuario) {
-
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("UPDATE usuario " + "SET NOME=?, SENHA=?, PESSOA_id=? " + "WHERE ID=?")) {
@@ -117,6 +125,8 @@ public class UsuarioController implements Controller<Usuario> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao editar usuario", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 }

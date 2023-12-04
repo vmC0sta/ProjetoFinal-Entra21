@@ -33,6 +33,8 @@ public class ProdutoController implements Controller<Produto> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -67,6 +69,8 @@ public class ProdutoController implements Controller<Produto> {
 			return produtos;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os produtos", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -100,6 +104,8 @@ public class ProdutoController implements Controller<Produto> {
 			return produto;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -116,6 +122,8 @@ public class ProdutoController implements Controller<Produto> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -128,6 +136,8 @@ public class ProdutoController implements Controller<Produto> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 
 	}

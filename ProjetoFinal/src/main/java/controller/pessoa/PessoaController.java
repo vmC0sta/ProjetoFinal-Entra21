@@ -55,6 +55,8 @@ public class PessoaController implements Controller<Pessoa> {
 			return pessoas;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os Usuarios", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
     }
 
@@ -130,7 +132,9 @@ public class PessoaController implements Controller<Pessoa> {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao exibir Pessoa por ID", e);
-        }
+        }finally {
+			dbConnection.closeConnection();
+		}
     }
 
 
@@ -145,7 +149,9 @@ public class PessoaController implements Controller<Pessoa> {
     	            return rowsDeleted > 0; 
     	        } catch (SQLException e) {
     	            throw new RuntimeException("Erro ao excluir Pessoa por ID", e);
-    	        }
+    	        }finally {
+    				dbConnection.closeConnection();
+    			}
     	    }
 
     @Override
@@ -170,6 +176,8 @@ public class PessoaController implements Controller<Pessoa> {
             return rowsUpdated > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao editar Pessoa", e);
-        }
+        }finally {
+			dbConnection.closeConnection();
+		}
     }
 }

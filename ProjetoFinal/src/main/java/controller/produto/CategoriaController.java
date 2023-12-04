@@ -29,6 +29,8 @@ public class CategoriaController implements Controller<Categoria> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao salvar categoria", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -48,6 +50,8 @@ public class CategoriaController implements Controller<Categoria> {
 			return categorias;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todas as categorias", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 
@@ -66,7 +70,9 @@ public class CategoriaController implements Controller<Categoria> {
 	        return categoria;
 	    } catch (SQLException e) {
 	        throw new RuntimeException("Erro ao exibir categoria " + e);
-	    }
+	    }finally {
+			dbConnection.closeConnection();
+		}
 	}
 
 	@Override
@@ -78,6 +84,8 @@ public class CategoriaController implements Controller<Categoria> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o Categoria", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 	@Override
@@ -91,6 +99,8 @@ public class CategoriaController implements Controller<Categoria> {
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o produto", e);
+		}finally {
+			dbConnection.closeConnection();
 		}
 	}
 }
