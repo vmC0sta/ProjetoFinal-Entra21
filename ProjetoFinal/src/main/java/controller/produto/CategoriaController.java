@@ -72,15 +72,14 @@ public class CategoriaController implements Controller<Categoria> {
 	@Override
 	public boolean excluir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Categoria WHERE = ?")) {
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Categoria WHERE id = ?")) {
 			preparedStatement.setLong(1, id);
+			preparedStatement.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao excluir o Categoria", e);
 		}
-
 	}
-
 	@Override
 	public boolean editar(Long id, Categoria categoria) {
 		try (Connection connection = dbConnection.getConnection();

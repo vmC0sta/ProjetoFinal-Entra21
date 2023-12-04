@@ -41,7 +41,7 @@
 	            	 out.print("<td>"+ categoria.getId() +"</td>");
 	            	 out.print("<td>"+ categoria.getDescricao()+"</td>");
 	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/alteracao/alteracaoCategoria/alterarCategoria.jsp?id="+categoria.getId()+"'>editar</a></td>");
-	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/exclusao/exclusaoProduto/processarExclusaoProduto.jsp?id="+categoria.getId()+"'>excluir</a></td>");
+	             	 out.print("<td><a href='http://localhost:8080/ProjetoFinal/menu/produto/exclusao/exclusaoCategoria/processarExclusaoCategoria.jsp?id="+categoria.getId()+"'>excluir</a></td>");
 	            	 out.print("</tr>");
 	             }
 	           %>

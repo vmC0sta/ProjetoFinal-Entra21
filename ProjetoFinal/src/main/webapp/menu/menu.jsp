@@ -31,7 +31,7 @@
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/produtos.jsp">Produto</a> <a
 										class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/categorias.jsp">Categoria</a> <a
-										class="dropdown-item" href="#">Unidade de Medida</a>
+										class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/unidadesMedida.jsp">Unidade de Medida</a>
 								</div>
 							</li>
 						</ul>
