@@ -23,7 +23,13 @@ public class EnderecoController implements Controller<Endereco> {
     }
 
     @Override
-    public void excluir(Long id) {
-
+    public boolean excluir(Long id) {
+    	return false;
     }
+
+	@Override
+	public boolean editar(Long id, Endereco t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

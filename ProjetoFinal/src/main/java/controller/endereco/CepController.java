@@ -21,7 +21,13 @@ public class CepController<Cep> implements Controller<Cep> {
     }
 
     @Override
-    public void excluir(Long id) {
-
+    public boolean excluir(Long id) {
+    	return false;
     }
+
+	@Override
+	public boolean editar(Long id, Cep t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

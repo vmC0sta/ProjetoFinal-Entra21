@@ -9,7 +9,6 @@ import model.endereco.Pais;
 import model.pessoa.Cargo;
 import model.pessoa.Pessoa;
 import model.pessoa.TipoPessoa;
-import model.usuario.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
