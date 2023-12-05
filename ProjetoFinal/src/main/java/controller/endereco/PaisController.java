@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.endereco.*;
-
+import model.pessoa.Pessoa;
+import model.usuario.Usuario;
 import controller.Controller;
 import Util.DBConnection;
 
@@ -43,7 +45,9 @@ public class PaisController implements Controller<Pais> {
 				Pais pais = new Pais();
 				pais.setId(resultSet.getLong("ID"));
 				pais.setDescricao(resultSet.getString("DESCRICAO"));
+				paises.add(pais);
 			}
+			return paises;
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao exibir todos os países", e);
 		} finally {
@@ -55,16 +59,20 @@ public class PaisController implements Controller<Pais> {
 	public Pais exibir(Long id) {
 		try (Connection connection = dbConnection.getConnection();
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT ID,DESCRICAO FROM PAIS WHERE ID = ?");
-				ResultSet resultSet = preparedStatement.executeQuery()) {
+						.prepareStatement("SELECT ID,DESCRICAO FROM pais WHERE id = ?")) {
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
 			Pais pais = new Pais();
 			if (resultSet.next()) {
+
 				pais.setId(resultSet.getLong("ID"));
 				pais.setDescricao(resultSet.getString("DESCRICAO"));
+
 			}
 			return pais;
+
 		} catch (SQLException e) {
-			throw new RuntimeException("Erro ao exibir país", e);
+			throw new RuntimeException("Erro ao exibir usuario", e);
 		} finally {
 			dbConnection.closeConnection();
 		}

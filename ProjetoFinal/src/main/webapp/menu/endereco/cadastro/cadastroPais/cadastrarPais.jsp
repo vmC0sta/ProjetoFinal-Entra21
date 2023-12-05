@@ -13,10 +13,10 @@
 		
 		<main class="container">
 		
-			<h1 style="margin: 1.5rem 0">Cadastrar Categoria</h1>
-			<form action="processarCategoria.jsp" method="POST">
+			<h1 style="margin: 1.5rem 0">Cadastrar País</h1>
+			<form action="processarPais.jsp" method="POST">
 				<div class="form-row">
-					<div class="form-group col-md-1" style="margin: 1rem 0">
+					<div class="form-group col-md-6" style="margin: 1rem 0">
 						<label for="id" style="font-weight: bolder">Descrição</label> 
 						<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
 					</div>

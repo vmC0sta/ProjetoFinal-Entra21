@@ -37,6 +37,21 @@
 						</ul>
 					</li>
 					
+					<li class="nav-item">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">Endereço</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/endereco/produtos.jsp">Endereço</a> 
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/categorias.jsp">Cep</a> 
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/unidadesMedida.jsp">Município</a>
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/unidadesMedida.jsp">Estado</a>
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/endereco/paises.jsp">País</a>
+								</div>
+							</li>
+						</ul>
+					</li>
+					
 				</ul>
 				<div class="d-flex">
 					<button class="btn btn-primary" type="button">Perfil</button>
