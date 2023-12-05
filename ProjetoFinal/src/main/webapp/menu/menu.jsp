@@ -45,7 +45,7 @@
 									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/endereco/produtos.jsp">Endereço</a> 
 									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/categorias.jsp">Cep</a> 
 									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/unidadesMedida.jsp">Município</a>
-									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/produto/unidadesMedida.jsp">Estado</a>
+									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/endereco/estados.jsp">Estado</a>
 									<a class="dropdown-item" href="http://localhost:8080/ProjetoFinal/menu/endereco/paises.jsp">País</a>
 								</div>
 							</li>

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.endereco.*;
-import model.pessoa.Pessoa;
-import model.usuario.Usuario;
 import controller.Controller;
 import Util.DBConnection;
 
